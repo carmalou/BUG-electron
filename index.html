@@ -131,10 +131,10 @@ class: left, middle, inverse
 
 # No Internet Access
 
-* 64% of Americans have smartphones, but of these only 19% have consistent internet access at home
-* 15% indicated that they owned a smartphone and had limited options for accessing the internet outside of their cellphones
-* 10% indicated that they owned a smartphone and had no high-speed internet at home
-* 7% indicated that they owned a cellphone and had limited options for access and no internet at home
+* 64% of Americans have smartphones, but of these *only 19% have consistent internet access beyond their phone*
+* 15% indicated that they owned a smartphone but had *limited options for accessing the internet outside of their cellphones*
+* 10% indicated that they owned a smartphone but had *no high-speed internet at home*
+* 7% indicated that they owned a cellphone but had *limited options for access and no internet at home*
 
 ???
 To me, this is the most interesting use-case for bringing apps offline. It's kind of funny that now we are working to take apps *offline* when for so long we were working to become connected. But there is an incredibly compelling use-case for bringing apps offline. From a 2015 Pew study, 64% of Americans reported having a smartphone in 2015, and of those 19% reported having a smartphone, but did not have internet at home. That's more than 36 million americans. Imagine the possibilities and benefits for people with limited internet access if we take our apps and make them usable offline. Really, I think this is a whole talk in and of itself, but I think its compelling and important to point out.
@@ -147,9 +147,9 @@ class: left, middle, inverse
 
 # Electron apps have three basic parts
 
-## - package.json (lists dependencies and points to main file)
-## - main.js (opens and closes windows and loads html files)
-## - index.html (the webpage being rendered)
+### - package.json (lists dependencies and points to main file)
+### - main.js (opens and closes windows and loads html files)
+### - index.html (the webpage being rendered)
 
 ???
 This is a pretty basic example, and there is one key difference. A lot of Electron apps have *two* package.json files. They'll have a package.json file in the src directory. This json file contains all of the dependencies for the app itself. So for instance if you were using lodash to parse data, that would go in the source's package.json.
