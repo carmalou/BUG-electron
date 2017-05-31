@@ -19,10 +19,11 @@
       .inverse {
         background: #272822;
         color: #9b9c96;
-        /*text-shadow: 0 0 20px #333;*/
       }
-      img {
-        width: 100%;
+      .remark-slide-content {
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
       }
     </style>
   </head>
@@ -44,16 +45,15 @@ class: center, middle, inverse
 ## Blog: [carmalou.com](http://carmalou.com)
 ---
 class: center, middle, inverse
-
-![alt text](./img/electron.jpg "Electrons in an atom")
+background-image: url(./img/electron.jpg)
 
 ???
 Electron..? Isn't that something in an Atom?
-Electron is a JavaScript framework that allows you to use JavaScript outside of the browser to build desktop applications.
+Electron is a JavaScript framework that allows you to use JavaScript outside of the browser to build desktop applications. And while some people have *negative* feelings about JavaScript, I'm *positive* Electron will change your mind.
 ---
 class: left, middle, inverse
 
-### No witchcraft required, it's just the same JavaScript application in a Chromium window with the url bar, back buttons, and other navigation tools.
+### No witchcraft required, it's just the same JavaScript application in a Chromium window without the url bar, back buttons, and other navigation tools.
 
 ???
 [Chromium](https://www.chromium.org/) is an open source browser that pre-dates Google Chrome. Google Chrome is based on Chromium.
@@ -83,8 +83,14 @@ class: center, middle, inverse
 
 # Sounds kinda cool. But why would I leave the browser?
 
+* One codebase, so it's easier to maintain
+* One codebase compiles for multiple platforms
+* Take existing knowledge and write a desktop app _today_
+
 ???
-So yeah, Electron seems pretty cool, but why would I want to leave the browser? The internet connects to everything else, so why would I want to get rid of that?
+These seem pretty self explanatory, but just in case, is there anyone here who has had to deal with multiple codebases for a single app? Like maybe Mac having one codebase and Windows having another? I definitely have and that can be a real pain. This gives us kind of a two for one deal with having a single codebase in a language we already know, and having to change only a few build scripts to get multiple apps. Think of the amazing work you could do if you didn't have to redo what you've already done.
+
+But maybe you're thinking Electron seems pretty cool, but why would I want to leave the browser? The internet connects to everything else, so why would I want to get rid of that?
 ---
 class: center, middle, inverse
 
@@ -93,93 +99,44 @@ class: center, middle, inverse
 ???
 So let's take a moment to talk about freeing ourselves from the browser. Isn't it super great how CSS works exactly the same way across all the browsers? What about new ES6 features that are always supported the exact same way across all browsers?
 
-All jokes aside, it would be super great if all of the browsers implemented standards the same way, but they don't. Certain browsers are more on top of this than others, but the great thing about Electron is that because it's only using Chromium, we don't have to worry about whether or not our CSS is going to work in IE or if IE supports this new ES6 feature yet. This is pretty much the ultimate "works on my machine" since we only have to worry about Chromium.
+All jokes aside, it would be super great if all browsers implemented standards the same way, but they don't. Certain browsers are more on top of this than others, but the great thing about Electron is that because it's only using Chromium, we don't have to worry about whether or not our CSS is going to work in IE or if IE supports this new ES6 feature yet. This is pretty much the ultimate "works on my machine" since we only have to worry about Chromium.
 ---
 class: center, middle, inverse
 
 # Free yourself from the Internet
 
 ???
-To me, this is where the ability to write offline apps becomes very very interesting.
----
-class: center, middle, inverse
-
-# What is "offline?"
+Over the next few slides we'll discuss the different types of internet access and what online really means.
 ---
 class: center, middle, inverse
 
 # Intermittent Internet
----
-class: center, middle, inverse
 
-# No Internet Access
+* Spotty cell phone service
+* Spotty internet service
+* Traveling without free wifi
+
+???
+Think about something like Evernote, or even Google docs where you're able to continue working on your project even without internet access. And then later when you regain access, you're able to sync up your work. It's pretty seemless and Electron makes this possible for us too.
 ---
 class: center, middle, inverse
 
 # Webpage is down
+
+???
+This one is pretty self explanatory, but it's worth noting that if you have a desktop app, the webpage won't be *down* in the traditional way. You won't be seeing a 404 where the server is just not finding/rendering the page. You might have a situation where your API is down and you can't save data. However the beauty of a desktop app is, as we discussed before, you can have a seamless transition between not being able to save data, and then bringing your API back up to be able to save again.
 ---
 class: center, middle, inverse
 
-# Still not convinced?
----
-class: center, middle, inverse
+# No Internet Access
 
-# One codebase, so it's easier to maintain
----
-class: center, middle, inverse
+* 64% of Americans have smartphones, but of these only 19% have consistent internet access at home
+* 15% indicated that they owned a smartphone and had limited options for accessing the internet outside of their cellphones
+* 10% indicated that they owned a smartphone and had no high-speed internet at home
+* 7% indicated that they owned a cellphone and had limited options for access and no internet at home
 
-# One codebase compiles for multiple platforms
----
-class: center, middle, inverse
-
-# Only uses Chromium, so no issues with varying browser requirements
----
-class: center, middle, inverse
-
-# Chrome dev tools!
----
-class: center, middle, inverse
-
-# Take existing knowledge and write a desktop app _today_
----
-class: center, middle, inverse
-
-# Examples
----
-class: left, middle, inverse
-
-## - [Slack](https://slack.com/)
-## - [Atom](https://atom.io/)
-## - [Visual Studio Code](https://code.visualstudio.com)
-## - [Mapbox Studio Classic](https://www.mapbox.com/help/define-mapbox-studio-classic/)
----
-class: center, middle, inverse
-
-# Here are some you might not be familiar with
----
-class: center, middle, inverse
-
-# [HyperTerm](https://hyperterm.org/)
-
-### A cool terminal emulator to run bash commands. And, it's inspectable.
----
-class: center, middle, inverse
-
-# [Brave](https://brave.com/)
-
-### A browser that blocks ads and trackers
----
-class: center, middle, inverse
-
-# [Gitify](http://gitify.io/)
-
-### Github notifications in the menubar
----
-class: center, middle, inverse
-
-# [Shake](http://kurisubrooks.com/shake)
-
-### Earthquake early warning program for Japan
+???
+To me, this is the most interesting use-case for bringing apps offline. It's kind of funny that now we are working to take apps *offline* when for so long we were working to become connected. But there is an incredibly compelling use-case for bringing apps offline. From a 2015 Pew study, 64% of Americans reported having a smartphone in 2015, and of those 19% reported having a smartphone, but did not have internet at home. That's more than 36 million americans. Imagine the possibilities and benefits for people with limited internet access if we take our apps and make them usable offline. Really, I think this is a whole talk in and of itself, but I think its compelling and important to point out.
 ---
 class: center, middle, inverse
 
@@ -218,30 +175,9 @@ function createWindow () {
   });
 }
 ```
----
-class: center, middle, inverse
 
-# Open finder
----
-class: left, middle, inverse
-
-```javascript
-var shell = require('electron').shell;
-
-shell.showItemInFolder('full/file/path.extension');
-```
----
-class: center, middle, inverse
-
-# Open files
----
-class: left, middle, inverse
-
-```javascript
-var shell = require('electron').shell;
-
-shell.openItem('full/file/path.extension');
-```
+???
+I think the most important thing to note here is that we have to explicitly set our window variable to null. Why is this? It's because normally in the browser, the browser itself is handling garbage collection. So when we close a window we don't have to worry about setting it to null or getting rid of its children because the browser is handling that for us. However in Electron, there isn't really a browser to handle that for us, so we have to set our window to null explicitly.
 ---
 class: center, middle, inverse
 
@@ -271,46 +207,27 @@ if(whatIsMyComp == 'linux') {
 ---
 class: center, middle, inverse
 
-# Get screen size
----
-class: left, middle, inverse
-
-```javascript
-var electronScreen = require('electron').screen;
-var size = electronScreen.getPrimaryDisplay().size;
-
-console.log(size.width); // width of screen in pixels
-console.log(size.height); // height of screen in pixels
-```
----
-class: center, middle, inverse
-
 # Communicate between processes
 ---
 class: center, middle, inverse
 
 # Main process
----
-class: left, middle, inverse
 
-## - Handles opening and closing windows
-## - Can communicate with renderer process
-## - Receives messages on `ipcMain`
-## - Sends messages on `webContents`
+* Handles opening and closing windows
+* Can communicate with renderer process
+* Receives messages on `ipcMain`
+* Sends messages on `webContents`
 ---
 class: center, middle, inverse
 
 # Renderer process
----
-class: left, middle, inverse
 
-## - Controller for window
-## - Each window has its own renderer process
-## - Sends and receives messages on `ipcRenderer`
----
+* Controller for window
+* Each window has its own renderer process
+* Sends and receives messages on `ipcRenderer`
 
-  <p>Hi! My name is <span id="name">BLANK</span>.</p>
-
+???
+Next we'll look at a super simple program that has an on-click event which opens a new window. You type a value into a field in the new window, and when you click "OK", the value is submitted back to the first window and the update is rendered. So let's take a look.
 ---
 class: left, middle, inverse
 
@@ -320,6 +237,9 @@ class: left, middle, inverse
 function openTheWindow() {
   ipcRenderer.send('open-name-window');
 }```
+
+???
+This is our onclick function, it is basically taking advantage of an event listener in the main.js file.
 ---
 class: left, middle, inverse
 
@@ -327,6 +247,7 @@ class: left, middle, inverse
 
 ```javascript
 ipcMain.on('open-name-window', function() {
+  // don't open infinite name windows!
   if(nameWindow != undefined) {
     return;
   }
@@ -337,6 +258,9 @@ ipcMain.on('open-name-window', function() {
   });
 });
 ```
+
+???
+This is the actual event listener in the main.js file, which opens a new, secondary window.
 ---
 class: left, middle, inverse
 
@@ -349,6 +273,8 @@ function sendNameBack(event) {
   ipcRenderer.send('update-the-name', tmpName);
 }
 ```
+???
+We are using the ipcRenderer module to call another event and send along the variable
 ---
 class: left, middle, inverse
 
@@ -366,6 +292,9 @@ ipcMain.on('update-the-name', function(event, name) {
   nameWindow.close();
 });
 ```
+
+???
+So there are a couple of things we want to look at here. First is that in order to communicate with the window that *sent* the message, we could use the event.sender.send function. However we might want to communicate with a specific window which *did not* send the message. In order to that, we target the variable name and use the webContents function.
 ---
 class: center, middle, inverse
 
@@ -385,6 +314,7 @@ class: left, middle, inverse
 - [https://github.com/sindresorhus/awesome-electron](https://github.com/sindresorhus/awesome-electron)
 - [https://www.toptal.com/javascript/electron-cross-platform-desktop-apps-easy](https://www.toptal.com/javascript/electron-cross-platform-desktop-apps-easy)
 - [https://medium.com/developers-writing/building-a-desktop-application-with-electron-204203eeb658#.2g80fgpxv](https://medium.com/developers-writing/building-a-desktop-application-with-electron-204203eeb658#.2g80fgpxv)
+- [http://www.pewinternet.org/2015/04/01/us-smartphone-use-in-2015/](http://www.pewinternet.org/2015/04/01/us-smartphone-use-in-2015/)
 ---
 class: center, middle, inverse
 
