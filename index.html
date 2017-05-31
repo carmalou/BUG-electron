@@ -78,7 +78,7 @@ class: left, middle, inverse
 ### The files exist on the computer. They are not being served from another location.
 
 ???
-This probably seems really obvious since we're talking about desktop apps. But the distinction brings up a lot of important difference between building a web app and building a desktop app. We'll talk about the difference between pushing updates a little later on, but the difference between updating a web app and updating a desktop app are pretty stark.
+This probably seems really obvious since we're talking about desktop apps. But the distinction brings up a lot of important difference between building a web app and building a desktop app. It's really a complete flip in logic. With a web app you're updating one place at a designated time. You might have multiple servers of course, but your deploy is usually a single time event regardless of user input. However with a desktop app, its the complete opposite. Your users are going to be in control of when or if the app updates -- depending on how you decide to handle updates. In addition, the updates will be pushed likely one user at a time, instead of a one time event. So it's a really different way of thinking about how to handle updates. I'm not going to get into auto-updates during this talk because it's a talk in itself, but I do have a blog post about it that I'll share after.
 ---
 class: left, middle, inverse
 
@@ -89,7 +89,7 @@ class: left, middle, inverse
 * Take existing knowledge and write a desktop app _today_
 
 ???
-These seem pretty self explanatory, but just in case, is there anyone here who has had to deal with multiple codebases for a single app? Like maybe Mac having one codebase and Windows having another? I definitely have and that can be a real pain. This gives us kind of a two for one deal with having a single codebase in a language we already know, and having to change only a few build scripts to get multiple apps. Think of the amazing work you could do if you didn't have to redo what you've already done.
+These seem pretty self explanatory, but just in case, is there anyone here who has had to deal with multiple codebases for a single app? Like maybe mobile apps being written in both swift or c#. Or programs or games that are available in one OS but not another? I definitely have and that can be a real pain. This gives us kind of a two for one deal with having a single codebase in a language we already know, and having to change only a few build scripts to get multiple apps. Think of the amazing work you could do if you didn't have to redo what you've already done.
 
 But maybe you're thinking Electron seems pretty cool, but why would I want to leave the browser? The internet connects to everything else, so why would I want to get rid of that?
 ---
