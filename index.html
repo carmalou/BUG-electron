@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Free yourself from the Browser with Electron</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      a {
+        color: #a07cc0;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .inverse {
+        background: #272822;
+        color: #9b9c96;
+        /*text-shadow: 0 0 20px #333;*/
+      }
+      img {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle, inverse, inverse
+
+# Free yourself from the Browser with [Electron](http://electron.atom.io/)
+---
+class: center, middle, inverse
+
+# About me
+---
+layout: false
+class: center, middle, inverse
+# Carmen Bourlon
+## Twitter: [@carmalou](https://twitter.com/carmalou)
+## Blog: [carmalou.com](http://carmalou.com)
+---
+class: center, middle, inverse
+
+![alt text](./img/electron.jpg "Electrons in an atom")
+
+???
+Electron..? Isn't that something in an Atom?
+Electron is a JavaScript framework that allows you to use JavaScript outside of the browser to build desktop applications.
+---
+class: left, middle, inverse
+
+### No witchcraft required, it's just the same JavaScript application in a Chromium window with the url bar, back buttons, and other navigation tools.
+
+???
+[Chromium](https://www.chromium.org/) is an open source browser that pre-dates Google Chrome. Google Chrome is based on Chromium.
+---
+class: center, middle, inverse
+
+# Ok, so it's basically the browser?
+
+???
+Let's talk a bit about how Electron is like the browser.
+---
+class: left, middle, inverse
+
+### When the application opens, it uses a chromium window to display the files, which allows the use of HTML, CSS, and JavaScript.
+
+???
+Because Electron is using a Chromium window to display your files, its basically the browser with one, very important distinction.
+---
+class: left, middle, inverse
+
+### The files exist on the computer. They are not being served from another location.
+
+???
+This probably seems really obvious since we're talking about desktop apps. But the distinction brings up a lot of important difference between building a web app and building a desktop app. We'll talk about the difference between pushing updates a little later on, but the difference between updating a web app and updating a desktop app are pretty stark.
+---
+class: center, middle, inverse
+
+# Sounds kinda cool. But why would I leave the browser?
+
+???
+So yeah, Electron seems pretty cool, but why would I want to leave the browser? The internet connects to everything else, so why would I want to get rid of that?
+---
+class: center, middle, inverse
+
+# Free yourself from the Browser
+
+???
+So let's take a moment to talk about freeing ourselves from the browser. Isn't it super great how CSS works exactly the same way across all the browsers? What about new ES6 features that are always supported the exact same way across all browsers?
+
+All jokes aside, it would be super great if all of the browsers implemented standards the same way, but they don't. Certain browsers are more on top of this than others, but the great thing about Electron is that because it's only using Chromium, we don't have to worry about whether or not our CSS is going to work in IE or if IE supports this new ES6 feature yet. This is pretty much the ultimate "works on my machine" since we only have to worry about Chromium.
+---
+class: center, middle, inverse
+
+# Free yourself from the Internet
+
+???
+To me, this is where the ability to write offline apps becomes very very interesting.
+---
+class: center, middle, inverse
+
+# What is "offline?"
+---
+class: center, middle, inverse
+
+# Intermittent Internet
+---
+class: center, middle, inverse
+
+# No Internet Access
+---
+class: center, middle, inverse
+
+# Webpage is down
+---
+class: center, middle, inverse
+
+# Still not convinced?
+---
+class: center, middle, inverse
+
+# One codebase, so it's easier to maintain
+---
+class: center, middle, inverse
+
+# One codebase compiles for multiple platforms
+---
+class: center, middle, inverse
+
+# Only uses Chromium, so no issues with varying browser requirements
+---
+class: center, middle, inverse
+
+# Chrome dev tools!
+---
+class: center, middle, inverse
+
+# Take existing knowledge and write a desktop app _today_
+---
+class: center, middle, inverse
+
+# Examples
+---
+class: left, middle, inverse
+
+## - [Slack](https://slack.com/)
+## - [Atom](https://atom.io/)
+## - [Visual Studio Code](https://code.visualstudio.com)
+## - [Mapbox Studio Classic](https://www.mapbox.com/help/define-mapbox-studio-classic/)
+---
+class: center, middle, inverse
+
+# Here are some you might not be familiar with
+---
+class: center, middle, inverse
+
+# [HyperTerm](https://hyperterm.org/)
+
+### A cool terminal emulator to run bash commands. And, it's inspectable.
+---
+class: center, middle, inverse
+
+# [Brave](https://brave.com/)
+
+### A browser that blocks ads and trackers
+---
+class: center, middle, inverse
+
+# [Gitify](http://gitify.io/)
+
+### Github notifications in the menubar
+---
+class: center, middle, inverse
+
+# [Shake](http://kurisubrooks.com/shake)
+
+### Earthquake early warning program for Japan
+---
+class: center, middle, inverse
+
+# Ok, I'm in. Where should I start?
+---
+class: center, middle, inverse
+
+# Electron apps have three basic parts
+
+## - package.json (lists dependencies and points to main file)
+## - main.js (opens and closes windows and loads html files)
+## - index.html (the webpage being rendered)
+---
+class: center, middle, inverse
+
+# Window
+---
+class: left, middle, inverse
+
+```javascript
+var electron = require('electron');
+var app = electron.app;
+var BrowserWindow = electron.BrowserWindow;
+var mainWindow;
+
+function createWindow () {
+  // Create the browser window.
+  mainWindow = new BrowserWindow({width: 800, height: 600});
+
+  // and load the index.html of the app.
+  mainWindow.loadURL(`file://${__dirname}/index.html`);
+
+  // Emitted when the window is closed.
+  mainWindow.on('closed', function () {
+    mainWindow = null;
+  });
+}
+```
+---
+class: center, middle, inverse
+
+# Open finder
+---
+class: left, middle, inverse
+
+```javascript
+var shell = require('electron').shell;
+
+shell.showItemInFolder('full/file/path.extension');
+```
+---
+class: center, middle, inverse
+
+# Open files
+---
+class: left, middle, inverse
+
+```javascript
+var shell = require('electron').shell;
+
+shell.openItem('full/file/path.extension');
+```
+---
+class: center, middle, inverse
+
+# Get system information
+---
+class: left, middle, inverse
+
+```javascript
+var os = require('os');
+var whatIsMyComp = os.platform();
+
+if(whatIsMyComp == 'darwin') {
+  console.log('you are on mac');
+  useMacFilePath();
+}
+
+if(whatIsMyComp == 'win32') {
+  console.log('you are on windows');
+  useWindowsFilePath();
+}
+
+if(whatIsMyComp == 'linux') {
+  console.log('you are on linux');
+  useLinuxFilePath();
+}
+```
+---
+class: center, middle, inverse
+
+# Get screen size
+---
+class: left, middle, inverse
+
+```javascript
+var electronScreen = require('electron').screen;
+var size = electronScreen.getPrimaryDisplay().size;
+
+console.log(size.width); // width of screen in pixels
+console.log(size.height); // height of screen in pixels
+```
+---
+class: center, middle, inverse
+
+# Communicate between processes
+---
+class: center, middle, inverse
+
+# Main process
+---
+class: left, middle, inverse
+
+## - Handles opening and closing windows
+## - Can communicate with renderer process
+## - Receives messages on `ipcMain`
+## - Sends messages on `webContents`
+---
+class: center, middle, inverse
+
+# Renderer process
+---
+class: left, middle, inverse
+
+## - Controller for window
+## - Each window has its own renderer process
+## - Sends and receives messages on `ipcRenderer`
+---
+
+  <p>Hi! My name is <span id="name">BLANK</span>.</p>
+
+---
+class: left, middle, inverse
+
+# renderer.js sends message to main.js
+
+```javascript
+function openTheWindow() {
+  ipcRenderer.send('open-name-window');
+}```
+---
+class: left, middle, inverse
+
+# main.js receives message from renderer.js
+
+```javascript
+ipcMain.on('open-name-window', function() {
+  if(nameWindow != undefined) {
+    return;
+  }
+  nameWindow = new BrowserWindow({ width: 400, height: 300 });
+  nameWindow.loadURL(`file://${__dirname}/changeName.html`);
+  nameWindow.on('closed', function() {
+    nameWindow = null;
+  });
+});
+```
+---
+class: left, middle, inverse
+
+# new renderer process sends message to main.js
+
+```javascript
+function sendNameBack(event) {
+  event.preventDefault();
+  var tmpName = document.getElementById('newName').value;
+  ipcRenderer.send('update-the-name', tmpName);
+}
+```
+---
+class: left, middle, inverse
+
+# main.js sends message to main renderer window
+
+```javascript
+ipcMain.on('update-the-name', function(event, name) {
+  // communicate with the window that sent the initial message
+  // event.sender.send('render-the-name', name);
+
+  // communicate with a specific window
+  mainWindow.webContents.send('render-the-name', name);
+
+  // close new window
+  nameWindow.close();
+});
+```
+---
+class: center, middle, inverse
+
+# So where do we go from here?
+---
+class: left, middle, inverse
+
+## - Try it out yourself with [Electron Quick Start](https://github.com/electron/electron-quick-start)
+## - Download the [Electron APIs Demo](http://electron.atom.io/#get-started)
+---
+class: left, middle, inverse
+
+# References
+
+- [http://electron.atom.io/](http://electron.atom.io/)
+- [http://electron.atom.io/#get-started](http://electron.atom.io/#get-started)
+- [https://github.com/sindresorhus/awesome-electron](https://github.com/sindresorhus/awesome-electron)
+- [https://www.toptal.com/javascript/electron-cross-platform-desktop-apps-easy](https://www.toptal.com/javascript/electron-cross-platform-desktop-apps-easy)
+- [https://medium.com/developers-writing/building-a-desktop-application-with-electron-204203eeb658#.2g80fgpxv](https://medium.com/developers-writing/building-a-desktop-application-with-electron-204203eeb658#.2g80fgpxv)
+---
+class: center, middle, inverse
+
+# Questions?
+
+
+    </textarea>
+    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+      // You can also require other files to run in this process
+      require('./renderer.js')
+    </script>
+  </body>
+</html>
