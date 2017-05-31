@@ -49,13 +49,14 @@ background-image: url(./img/electron.jpg)
 
 ???
 Electron..? Isn't that something in an Atom?
-Electron is a JavaScript framework that allows you to use JavaScript outside of the browser to build desktop applications. And while some people have *negative* feelings about JavaScript, I'm *positive* Electron will change your mind.
+Electron is a JavaScript framework that allows you to use JavaScript outside of the browser to build desktop applications.
 ---
 class: left, middle, inverse
 
 ### No witchcraft required, it's just the same JavaScript application in a Chromium window without the url bar, back buttons, and other navigation tools.
 
 ???
+And while some people have *negative* feelings about JavaScript, I'm *positive* Electron will change your mind.
 [Chromium](https://www.chromium.org/) is an open source browser that pre-dates Google Chrome. Google Chrome is based on Chromium.
 ---
 class: center, middle, inverse
@@ -299,6 +300,21 @@ So there are a couple of things we want to look at here. First is that in order 
 class: center, middle, inverse
 
 # So where do we go from here?
+
+???
+Ok, so now that we have the basics of an Electron app, let's take our app from terminal to executable.
+---
+class: center, middle, inverse
+
+# Electron Packager
+
+#### npm install electron-packager -g
+#### "electron-packager /Users/carmenlong/Desktop/windows-comms/src windows-comms --out /Users/carmenlong/Desktop/windows-comms/build --platform=darwin --arch=x64 --overwrite"
+
+???
+Electron packager is a module that will allow you to take your apps and bundle them into executable apps. First we use the electron-packager command, and next include the path to the source files. next we designate the name of the app, and the path it will be delivered to. we designate the arch type (32bit vs 64bit) and the platform (darwin == mac). The last bit is to get rid of any old apps that are already in the build folder.
+
+NOTE: In order to use this in prod you will need to sign your app. I've included a few node_modules for that in the references.
 ---
 class: left, middle, inverse
 
@@ -315,6 +331,7 @@ class: left, middle, inverse
 - [https://www.toptal.com/javascript/electron-cross-platform-desktop-apps-easy](https://www.toptal.com/javascript/electron-cross-platform-desktop-apps-easy)
 - [https://medium.com/developers-writing/building-a-desktop-application-with-electron-204203eeb658#.2g80fgpxv](https://medium.com/developers-writing/building-a-desktop-application-with-electron-204203eeb658#.2g80fgpxv)
 - [http://www.pewinternet.org/2015/04/01/us-smartphone-use-in-2015/](http://www.pewinternet.org/2015/04/01/us-smartphone-use-in-2015/)
+- [https://github.com/electron-userland/electron-packager](https://github.com/electron-userland/electron-packager)
 ---
 class: center, middle, inverse
 
