@@ -80,7 +80,7 @@ class: left, middle, inverse
 ???
 This probably seems really obvious since we're talking about desktop apps. But the distinction brings up a lot of important difference between building a web app and building a desktop app. We'll talk about the difference between pushing updates a little later on, but the difference between updating a web app and updating a desktop app are pretty stark.
 ---
-class: center, middle, inverse
+class: left, middle, inverse
 
 # Sounds kinda cool. But why would I leave the browser?
 
@@ -109,7 +109,7 @@ class: center, middle, inverse
 ???
 Over the next few slides we'll discuss the different types of internet access and what online really means.
 ---
-class: center, middle, inverse
+class: left, middle, inverse
 
 # Intermittent Internet
 
@@ -127,7 +127,7 @@ class: center, middle, inverse
 ???
 This one is pretty self explanatory, but it's worth noting that if you have a desktop app, the webpage won't be *down* in the traditional way. You won't be seeing a 404 where the server is just not finding/rendering the page. You might have a situation where your API is down and you can't save data. However the beauty of a desktop app is, as we discussed before, you can have a seamless transition between not being able to save data, and then bringing your API back up to be able to save again.
 ---
-class: center, middle, inverse
+class: left, middle, inverse
 
 # No Internet Access
 
@@ -143,13 +143,18 @@ class: center, middle, inverse
 
 # Ok, I'm in. Where should I start?
 ---
-class: center, middle, inverse
+class: left, middle, inverse
 
 # Electron apps have three basic parts
 
 ## - package.json (lists dependencies and points to main file)
 ## - main.js (opens and closes windows and loads html files)
 ## - index.html (the webpage being rendered)
+
+???
+This is a pretty basic example, and there is one key difference. A lot of Electron apps have *two* package.json files. They'll have a package.json file in the src directory. This json file contains all of the dependencies for the app itself. So for instance if you were using lodash to parse data, that would go in the source's package.json.
+
+The second package.json resides *outside* of the source directory. This file contains any build dependencies that should not be included in the app itself. it can become really important to keep these files separate to keep your app from blowing up in size.
 ---
 class: center, middle, inverse
 
@@ -178,7 +183,7 @@ function createWindow () {
 ```
 
 ???
-I think the most important thing to note here is that we have to explicitly set our window variable to null. Why is this? It's because normally in the browser, the browser itself is handling garbage collection. So when we close a window we don't have to worry about setting it to null or getting rid of its children because the browser is handling that for us. However in Electron, there isn't really a browser to handle that for us, so we have to set our window to null explicitly.
+I think the most important thing to note here is that we have to explicitly set our window variable to null when the close event is called. Why is this? It's because normally in the browser, the browser itself is handling garbage collection. So when we close a window we don't have to worry about setting it to null or getting rid of its children because the browser is handling that for us. However in Electron, there isn't really a browser to handle that for us, so we have to set our window to null explicitly.
 ---
 class: center, middle, inverse
 
@@ -210,7 +215,7 @@ class: center, middle, inverse
 
 # Communicate between processes
 ---
-class: center, middle, inverse
+class: left, middle, inverse
 
 # Main process
 
@@ -219,7 +224,7 @@ class: center, middle, inverse
 * Receives messages on `ipcMain`
 * Sends messages on `webContents`
 ---
-class: center, middle, inverse
+class: left, middle, inverse
 
 # Renderer process
 
@@ -309,7 +314,7 @@ class: center, middle, inverse
 # Electron Packager
 
 #### npm install electron-packager -g
-#### "electron-packager /Users/carmenlong/Desktop/windows-comms/src windows-comms --out /Users/carmenlong/Desktop/windows-comms/build --platform=darwin --arch=x64 --overwrite"
+#### "build-mac": "electron-packager /Users/carmenlong/Desktop/NewElectronSample/src windows-comms --out /Users/carmenlong/Desktop/NewElectronSample/build --platform=darwin --arch=x64 --overwrite"
 
 ???
 Electron packager is a module that will allow you to take your apps and bundle them into executable apps. First we use the electron-packager command, and next include the path to the source files. next we designate the name of the app, and the path it will be delivered to. we designate the arch type (32bit vs 64bit) and the platform (darwin == mac). The last bit is to get rid of any old apps that are already in the build folder.
@@ -332,6 +337,8 @@ class: left, middle, inverse
 - [https://medium.com/developers-writing/building-a-desktop-application-with-electron-204203eeb658#.2g80fgpxv](https://medium.com/developers-writing/building-a-desktop-application-with-electron-204203eeb658#.2g80fgpxv)
 - [http://www.pewinternet.org/2015/04/01/us-smartphone-use-in-2015/](http://www.pewinternet.org/2015/04/01/us-smartphone-use-in-2015/)
 - [https://github.com/electron-userland/electron-packager](https://github.com/electron-userland/electron-packager)
+- [https://github.com/electron-userland/electron-osx-sign/wiki/1.-Getting-Started](https://github.com/electron-userland/electron-osx-sign/wiki/1.-Getting-Started)
+- [https://github.com/electron-userland/electron-builder/wiki/Code-Signing#windows](https://github.com/electron-userland/electron-builder/wiki/Code-Signing#windows)
 ---
 class: center, middle, inverse
 
